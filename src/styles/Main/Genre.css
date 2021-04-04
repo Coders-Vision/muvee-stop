@@ -1,0 +1,23 @@
+.btn {
+  background-color: transparent !important;
+}
+
+
+.list-inline-item .btn-outline-info {
+  color: #5a606b;
+  border: 1px solid #5a606b;
+  margin-bottom: 10px;
+  border-radius: 25px;
+  font-weight: 500;
+}
+.btn:focus,
+.btn:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.list-inline-item .btn-outline-info:hover {
+  color: #fff;
+  border-color: #ffff;
+  background-color: transparent;
+  transition: all 0.3s ease-in-out;
+}
