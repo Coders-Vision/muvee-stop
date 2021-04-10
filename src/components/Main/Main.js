@@ -9,6 +9,7 @@ import TopRated from "./TopRatedPage/TopRated";
 import Upcoming from "./UpcomingPage/Upcoming";
 import Movie from "./MoviePage/Movie";
 import Celebrity from "./CelebrityPage/Celebrity";
+import Favourite from "./FavouritePage/Favourite";
 import NotFoundPage from "./NotFoundPage";
 import { Container } from "react-bootstrap";
 
@@ -24,6 +25,7 @@ function Main() {
           <Route path="/upcoming" component={Upcoming} />
           <Route path="/movie/:id" component={Movie} />
           <Route path="/celebrity/:id" component={Celebrity} />
+          <Route path="/favourite" component={Favourite} />
           <Route component={NotFoundPage} />
         </Switch>
       </Container>

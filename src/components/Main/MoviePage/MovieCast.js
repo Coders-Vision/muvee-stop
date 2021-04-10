@@ -20,7 +20,7 @@ function MovieCast({ id }) {
       .fill()
       .map((skele, index) => {
         return (
-          <Col xs={6} md={3} sm={4} className="text-center" key={index}>
+          <Col xs={6} sm={4} md={3} className="text-center" key={index}>
             <div className="">
               <SkeletonTheme color="#243142" highlightColor="#364963">
                 <Skeleton circle={true} height={155} width={150} />
@@ -41,7 +41,7 @@ function MovieCast({ id }) {
     movieCast &&
     movieCast.slice(0, 8).map((cast, index) => {
       return (
-        <Col xs={6} md={3} sm={4} key={index} className="text-center">
+        <Col xs={6} sm={4} md={3} key={index} className="mx-auto text-center">
           <div className="img-container">
             <Link to={`/celebrity/${cast.id}`} onClick={window.scroll(0, 0)}>
               <Image

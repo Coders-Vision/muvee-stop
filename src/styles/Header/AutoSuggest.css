@@ -7,7 +7,7 @@
 }
 
 .AutoCompleteText input[type="text"] {
-  width: 90%;
+  width: 80%;
   padding: 10px 10px;
   color: #ffff;
   font-size: 14px;
@@ -24,6 +24,15 @@
 
 .AutoCompleteText input[type="text"]:focus {
   background-color: #151c26;
+}
+
+.AutoCompleteText .search-icon {
+  width: 25px;
+  height: 25px;
+  margin-top: 10px;
+  margin-right: 10px;;
+  float: right;
+  fill: rgb(255, 255, 255);
 }
 
 .AutoCompleteText ul {
@@ -91,19 +100,6 @@ li .basic-info .movie-year {
   border: 3px solid #3e5169;
 }
 
-.AutoCompleteText ul .place {
-  padding-bottom: 2px;
-}
-.AutoCompleteText ul .capital {
-  padding-top: 2px;
-  padding-left: 2px;
-}
-.AutoCompleteText ul .country {
-  font-weight: bold;
-  font-size: small;
-  line-height: 15px;
-  padding-left: 2px;
-}
 
 @media screen and (max-width: 768px) {
   .AutoCompleteText ul {

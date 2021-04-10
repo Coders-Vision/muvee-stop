@@ -25,7 +25,7 @@ function Biography({ id }) {
           </SkeletonTheme>
         </Col>
         <Col xs={12} md={10}>
-          <Row style={{ textAlign: "center " }}>
+          <Row className="w-100" style={{ margin: "0 auto" }}>
             <SkeletonTheme color="#243142" highlightColor="#364963">
               <Skeleton width={100} />
             </SkeletonTheme>
@@ -98,8 +98,8 @@ function Biography({ id }) {
           />
         </Col>
         <Col xs={12} md={10}>
-          <Row style={{ textAlign: "center " }}>
-            <h3 className="display-4 w-100">{biography.name}</h3>
+          <Row className="mt-2" style={{ textAlign: "center " }}>
+            <h3 style={{fontSize:"2rem"}} className="display-4 w-100">{biography.name}</h3>
           </Row>
           <dl className="row mt-5">
             <dt className="col-sm-3">Birthday: </dt>

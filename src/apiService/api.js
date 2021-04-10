@@ -15,7 +15,13 @@ const poster = "https://image.tmdb.org/t/p/w300/";
 const banner = "https://image.tmdb.org/t/p/original/";
 export const getMoviesByQuery = async (queryVal) => {
   try {
+    let cancelToken;
+    if (typeof cancelToken != typeof undefined) {
+      cancelToken.cancel("Operation canceled due to new request.");
+    }
+    cancelToken = axios.CancelToken.source();
     const { data } = await axios.get(search, {
+      cancelToken: cancelToken.token,
       params: {
         api_key: process.env.REACT_APP_TMDB_API_KEY,
         query: queryVal,
@@ -41,7 +47,22 @@ export const getMovieById = async (id) => {
         language: "en_US",
       },
     });
-    return data;
+    const modifiedData = {
+      id: data.id,
+      title: data.title,
+      tagline: data.tagline,
+      poster: data.poster_path,
+      banner: data.backdrop_path,
+      genres: data.genres,
+      overview: data.overview,
+      year: data.release_date,
+      voteAvg: data.vote_average,
+      voteCount: data.vote_count,
+      status: data.status,
+      runtime: data.runtime,
+      country: data.production_countries,
+    };
+    return modifiedData;
   } catch (err) {
     console.error(err);
   }

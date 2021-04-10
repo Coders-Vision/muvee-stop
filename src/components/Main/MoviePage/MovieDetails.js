@@ -1,10 +1,15 @@
-import { React, useState, useEffect } from "react";
-import { Row, Col,Image, Button } from "react-bootstrap";
+import { React, useState, useEffect, useContext } from "react";
+import { Row, Col, Image, Button } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFilm, faStar } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFilm,
+  faStar,
+  faHeart as faHeartSol,
+} from "@fortawesome/free-solid-svg-icons";
 import {
   faPlayCircle,
+  faHeart as faHeartReg,
   faStar as regularStar,
 } from "@fortawesome/free-regular-svg-icons";
 
@@ -13,11 +18,16 @@ import { getMovieById } from "../../../apiService/api";
 import defaultBanner from "../default-banner.svg";
 import defaultPoster from "../default-poster.svg";
 import PlayerModal from "./PlayerModal";
+import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
 
 function MovieDetails({ id }) {
   const banner = "https://image.tmdb.org/t/p/original/";
   const [isOpen, setIsOpen] = useState(false);
   const [movieDetails, setMovieDetails] = useState(null);
+
+  const { checkFavMovie, addFavMovie, removeFavMovie } = useContext(
+    FavouriteMoviesContext
+  );
 
   useEffect(() => {
     const fetchMovieDetails = async () => {
@@ -38,7 +48,7 @@ function MovieDetails({ id }) {
     );
   };
 
-  const skeletonPoster = () => {
+  const skeletonBanner = () => {
     return (
       <SkeletonTheme color="#243142" highlightColor="#364963">
         <Skeleton height={`40vh`} />
@@ -46,15 +56,15 @@ function MovieDetails({ id }) {
     );
   };
 
-  const showMoviePoster = () => {
+  const showMovieBanner = () => {
     return (
       <>
         <div className="moviePoster ">
           <Image
             fluid
             src={
-              movieDetails.backdrop_path
-                ? `${banner}${movieDetails.backdrop_path}`
+              movieDetails.banner
+                ? `${banner}${movieDetails.banner}`
                 : defaultBanner
             }
             alt={movieDetails.title}
@@ -149,14 +159,45 @@ function MovieDetails({ id }) {
     );
   };
 
+  const showFavouriteButton = (mid) => {
+    return (
+      <div className="fav-btn mx-auto">
+        {checkFavMovie(mid) ? (
+          <>
+            <span className="badge p-2">
+              <FontAwesomeIcon icon={faHeartSol} />
+              {" Favourite Movie "}
+            </span>
+            <Button
+              className="ml-4"
+              variant="outline-info"
+              onClick={() => removeFavMovie(mid)}
+            >
+              {" Remove"}
+            </Button>
+          </>
+        ) : (
+          <>
+            <Button
+              className="ml-4"
+              variant="outline-info"
+              onClick={() => addFavMovie(mid)}
+            >
+              {" Add to Favourite"}
+            </Button>
+          </>
+        )}
+      </div>
+    );
+  };
   const showMovieDetails = () => {
     return (
       <>
         <Col className="d-none d-md-block mt-5" xs={12} md={2}>
           <img
             src={
-              movieDetails.poster_path
-                ? `${banner}${movieDetails.poster_path}`
+              movieDetails.poster
+                ? `${banner}${movieDetails.poster}`
                 : defaultPoster
             }
             className="img-fluid  img-thumbnail w-100 rounded float-left"
@@ -171,10 +212,13 @@ function MovieDetails({ id }) {
           <Row className="text-center">
             <h3 className="w-100">{movieDetails.title}</h3>
           </Row>
-          <Row className="text-center">
+          <Row className="w-100 mt-2">
+            {showFavouriteButton(movieDetails.id)}
+          </Row>
+          <Row className="text-center mt-2">
             <Col className="mt-2">
               <Rating
-                initialRating={movieDetails.vote_average}
+                initialRating={movieDetails.voteAvg}
                 readonly
                 emptySymbol={<FontAwesomeIcon icon={regularStar} />}
                 fullSymbol={<FontAwesomeIcon icon={faStar} />}
@@ -182,8 +226,7 @@ function MovieDetails({ id }) {
                 stop={10}
                 step={2}
               />
-
-              <div className="text-center text-white-50">{`${movieDetails.vote_average} of ${movieDetails.vote_count}`}</div>
+              <div className="text-center text-white-50">{`${movieDetails.voteAvg} of ${movieDetails.voteCount}`}</div>
             </Col>
             <Col className="mt-2">
               <FontAwesomeIcon icon={faFilm} />
@@ -196,11 +239,10 @@ function MovieDetails({ id }) {
           <dl className="row">
             <dt className="col-sm-3 mt-2">Country:</dt>
             <dd className="col-sm-9 mt-2">
-              {movieDetails.production_countries[0] &&
-                movieDetails.production_countries[0].name}
+              {movieDetails.country[0] && movieDetails.country[0].name}
             </dd>
             <dt className="col-sm-3 mt-2">Year:</dt>
-            <dd className="col-sm-9 mt-2">{`${movieDetails.release_date.substr(
+            <dd className="col-sm-9 mt-2">{`${movieDetails.year.substr(
               0,
               4
             )}`}</dd>
@@ -216,7 +258,7 @@ function MovieDetails({ id }) {
     <>
       <Row className="mt-2 ">
         {movieDetails ? showPlayerModal() : ""}
-        <Col>{movieDetails ? showMoviePoster() : skeletonPoster()}</Col>
+        <Col>{movieDetails ? showMovieBanner() : skeletonBanner()}</Col>
       </Row>
       <Row className="p-4 mt-5 shadow-sm shadow-lg">
         {movieDetails ? showMovieDetails() : skeletonMovieDetails()}

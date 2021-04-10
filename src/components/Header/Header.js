@@ -1,13 +1,27 @@
-import { React, useState } from "react";
-import { NavLink,Link } from "react-router-dom";
+import { React, useState, useContext } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
+import { faBars, faHeart } from "@fortawesome/free-solid-svg-icons";
 import "../../styles/Header/Header.css";
 import AutoSuggest from "./AutoSuggest";
 import logo from "./logo.svg";
-
+import { FavouriteMoviesContext } from "../Context/FavouriteMoviesState";
 function Header() {
   const [toggle, setToggle] = useState(false);
+  const { getFavMoviesCount } = useContext(FavouriteMoviesContext);
+  const favMoviesCount = getFavMoviesCount();
+
+  const showFavMoviesCount = () => {
+    return favMoviesCount > 0 ? (
+      <span className="badge position-absolute top-0 left-100 translate-middle bg-danger">
+        {favMoviesCount}
+      </span>
+    ) : (
+      ""
+    );
+  };
+
   return (
     <header className="header dark-theme">
       <div className="responsive">
@@ -20,6 +34,14 @@ function Header() {
           <div className="brand-logo">
             <Link to={`/`}>
               <img src={logo} alt="muvee" />
+            </Link>
+          </div>
+          <div className="favourite-container">
+            <Link to={"/favourite"}>
+              <Button variant="outline-info">
+                <FontAwesomeIcon icon={faHeart} />
+                {showFavMoviesCount()}
+              </Button>
             </Link>
           </div>
         </div>
