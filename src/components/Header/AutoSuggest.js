@@ -77,10 +77,10 @@ const AutoSuggest = () => {
   });
   const handleKeyNavigation = (e) => {
     if (e.keyCode === 38 && KeyUpDownCounter > 0) {
-      List.current[KeyUpDownCounter].scrollIntoView({
+      setKeyUpDownCounter((preCounter) => preCounter - 1);
+      List.current[KeyUpDownCounter-1].scrollIntoView({
         behavior: "smooth",
       });
-      setKeyUpDownCounter((preCounter) => preCounter - 1);
     }
     if (e.keyCode === 40 && KeyUpDownCounter < Suggestion.length - 1) {
       List.current[KeyUpDownCounter].scrollIntoView({
