@@ -6,7 +6,7 @@ import { getMovieById } from "../../../apiService/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
-
+import SEO from ".././SEOComponent/SEO";
 function Favourite() {
   const [favourite, setFavourite] = useState([]);
   const { removeFavMovie, getFavMoviesId } = useContext(FavouriteMoviesContext);
@@ -46,39 +46,53 @@ function Favourite() {
     setFavourite([...remove]);
   };
 
+  const generateSeoTags = () => {
+    return (
+      <SEO
+        title={`Muvee Stop | Favourites`}
+        description={"All browse all your favourites movies"}
+        ogTitle={`Muvee Stop | Favourites`}
+        ogDescription={"All browse all your favourites movies"}
+      />
+    );
+  };
+
   const showFavourite =
     favourite &&
     favourite.map((movie) => {
       return (
-        <Col className="mb-4" xs="6" md="3" sm="3" key={movie.id}>
-          <Card>
-            <div className="card-container">
-              <Link to={`/movie/${movie.id}`}>
-                <Image
-                  className="rounded"
-                  fluid
-                  src={poster + movie.poster}
-                  alt={movie.title}
-                />
-              </Link>
-              <div className="badge-corner badge-corner-base">
-                <span>
-                  <FontAwesomeIcon
-                    color={"crimson"}
-                    icon={faTimesCircle}
-                    onClick={() => removeMovie(movie.id)}
+        <>
+          {generateSeoTags()}
+          <Col className="mb-4" xs="6" md="3" sm="3" key={movie.id}>
+            <Card>
+              <div className="card-container">
+                <Link to={`/movie/${movie.id}`}>
+                  <Image
+                    className="rounded"
+                    fluid
+                    src={poster + movie.poster}
+                    alt={movie.title}
                   />
-                </span>
+                </Link>
+                <div className="badge-corner badge-corner-base">
+                  <span>
+                    <FontAwesomeIcon
+                      color={"crimson"}
+                      icon={faTimesCircle}
+                      onClick={() => removeMovie(movie.id)}
+                    />
+                  </span>
+                </div>
+              </div>
+            </Card>
+            <div className="mt-3">
+              <div className="text-center">{movie.title}</div>
+              <div className="text-center text-white-50">
+                {movie.year.substr(0, 4)}
               </div>
             </div>
-          </Card>
-          <div className="mt-3">
-            <div className="text-center">{movie.title}</div>
-            <div className="text-center text-white-50">
-              {movie.year.substr(0, 4)}
-            </div>
-          </div>
-        </Col>
+          </Col>
+        </>
       );
     });
 
@@ -92,9 +106,11 @@ function Favourite() {
   };
 
   return (
-    <div className="favourite mt-4">
-      {favourite.length > 0 ? wrapFavourite() : defaultMovie()}
-    </div>
+    <>
+      <div className="favourite mt-4">
+        {favourite.length > 0 ? wrapFavourite() : defaultMovie()}
+      </div>
+    </>
   );
 }
 

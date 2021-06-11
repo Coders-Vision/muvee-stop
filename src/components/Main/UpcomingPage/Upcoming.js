@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
+import SEO from ".././SEOComponent/SEO";
 
 function Upcoming() {
   const [upcoming, setUpcoming] = useState(null);
@@ -118,15 +119,29 @@ function Upcoming() {
     );
   };
 
-  return (
-    <div className="upcoming mt-4">
-      {wrapUpcoming()}
-      <Pagination
-        pages={totalPages}
-        currentPage={currentPage}
-        setPage={setCurrentPage}
+  const generateSeoTags = () => {
+    return (
+      <SEO
+        title={`Muvee Stop | Upcoming`}
+        description={`Search your favourite on Muvee Stop by Upcoming`}
+        ogTitle={"Muvee Stop | Upcomming"}
+        ogDescription={`Search your favourite on Muvee Stop by Upcoming`}
       />
-    </div>
+    );
+  };
+
+  return (
+    <>
+      {generateSeoTags()}
+      <div className="upcoming mt-4">
+        {wrapUpcoming()}
+        <Pagination
+          pages={totalPages}
+          currentPage={currentPage}
+          setPage={setCurrentPage}
+        />
+      </div>
+    </>
   );
 }
 

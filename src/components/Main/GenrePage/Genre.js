@@ -11,6 +11,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
+import SEO from ".././SEOComponent/SEO";
+
 function Genre() {
   const [genreId, setGenreId] = useState(28);
   const [genre, setGenre] = useState(null);
@@ -120,16 +122,37 @@ function Genre() {
     );
   };
 
-  return (
-    <div className="genre">
-      <GenreList setGenreId={setGenreId} />
-      {wrapMoviesByGenreList()}
-      <Pagination
-        pages={totalPages}
-        currentPage={currentPage}
-        setPage={setCurrentPage}
+  const generateSeoTags = () => {
+    // const movieTitles =
+    //   genre &&
+    //   genre
+    //     .slice(0, 16)
+    //     .map((movie) => movie.title)
+    //     .join(",");
+    return (
+      <SEO
+        title={`Muvee Stop | Genre`}
+        description={`Search your favourite on Movie Stop by Genre`}
+        //keywords={movieTitles}
+        ogTitle={"Muvee Stop | Genre"}
+        ogDescription={`Search your favourite on Movie Stop by Genre`}
       />
-    </div>
+    );
+  };
+
+  return (
+    <>
+      {generateSeoTags()}
+      <div className="genre">
+        <GenreList setGenreId={setGenreId} />
+        {wrapMoviesByGenreList()}
+        <Pagination
+          pages={totalPages}
+          currentPage={currentPage}
+          setPage={setCurrentPage}
+        />
+      </div>
+    </>
   );
 }
 

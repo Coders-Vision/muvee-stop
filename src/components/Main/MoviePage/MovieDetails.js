@@ -19,6 +19,7 @@ import defaultBanner from "../default-banner.svg";
 import defaultPoster from "../default-poster.svg";
 import PlayerModal from "./PlayerModal";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
+import SEO from ".././SEOComponent/SEO";
 
 function MovieDetails({ id }) {
   const banner = "https://image.tmdb.org/t/p/original/";
@@ -190,9 +191,23 @@ function MovieDetails({ id }) {
       </div>
     );
   };
+
+  const generateSeoTags = (movieDetail) => {
+    return (
+      <SEO
+        title={`Muvee Stop | ${movieDetail?.title} (${movieDetails.year.substr(0, 4 )})`}
+        description={movieDetail?.overview}
+        ogTitle={movieDetail?.title}
+        ogDescription={movieDetail?.overview}
+        ogImage={movieDetails?.banner}
+      />
+    );
+  };
+
   const showMovieDetails = () => {
     return (
       <>
+        {generateSeoTags(movieDetails)}
         <Col className="d-none d-md-block mt-5" xs={12} md={2}>
           <img
             src={

@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Row, Col, Image } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { getCelebrity } from "../../../apiService/api";
+import SEO from ".././SEOComponent/SEO";
 
 import defaultPoster from "../default-poster.svg";
 function Biography({ id }) {
@@ -83,9 +84,21 @@ function Biography({ id }) {
     );
   };
 
+  const generateSeoTags = (bio) => {
+    return (
+      <SEO
+        title={`Muvee Stop | ${bio?.name}`}
+        description={bio?.biography}
+        ogTitle={`Muvee Stop | ${bio?.name}`}
+        ogDescription={bio?.biography}
+      />
+    );
+  };
+
   const showBiography = () => {
     return (
       <>
+        {generateSeoTags(biography)}
         <Col className="mx-auto" xs={6} sm={4} md={2}>
           <Image
             fluid
@@ -99,7 +112,9 @@ function Biography({ id }) {
         </Col>
         <Col xs={12} md={10}>
           <Row className="mt-2" style={{ textAlign: "center " }}>
-            <h3 style={{fontSize:"2rem"}} className="display-4 w-100">{biography.name}</h3>
+            <h3 style={{ fontSize: "2rem" }} className="display-4 w-100">
+              {biography.name}
+            </h3>
           </Row>
           <dl className="row mt-5">
             <dt className="col-sm-3">Birthday: </dt>

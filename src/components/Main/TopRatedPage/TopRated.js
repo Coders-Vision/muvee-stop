@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
+import SEO from ".././SEOComponent/SEO";
 
 function TopRated() {
   const [topRated, setTopRated] = useState(null);
@@ -118,15 +119,29 @@ function TopRated() {
     );
   };
 
-  return (
-    <div className="top-rated mt-4">
-      {wrapTopRated()}
-      <Pagination
-        pages={totalPages}
-        currentPage={currentPage}
-        setPage={setCurrentPage}
+  const generateSeoTags = () => {
+    return (
+      <SEO
+        title={`Muvee Stop | Top Rated`}
+        description={`Search your favourite on Muvee Stop by Top Rated`}
+        ogTitle={"Muvee Stop | Genre"}
+        ogDescription={`Search your favourite on Muvee Stop by Top Rated`}
       />
-    </div>
+    );
+  };
+
+  return (
+    <>
+      {generateSeoTags()}
+      <div className="top-rated mt-4">
+        {wrapTopRated()}
+        <Pagination
+          pages={totalPages}
+          currentPage={currentPage}
+          setPage={setCurrentPage}
+        />
+      </div>
+    </>
   );
 }
 

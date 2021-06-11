@@ -9,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
-
+import SEO from ".././SEOComponent/SEO";
 function Popular() {
   const [popular, setPopular] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -118,15 +118,29 @@ function Popular() {
     );
   };
 
-  return (
-    <div className="popular mt-4">
-      {wrapPopular()}
-      <Pagination
-        pages={totalPages}
-        currentPage={currentPage}
-        setPage={setCurrentPage}
+  const generateSeoTags = () => {
+    return (
+      <SEO
+        title={`Muvee Stop | Popular`}
+        description={`Search your favourite on Muvee Stop by Popular`}
+        ogTitle={"Muvee Stop | Popular"}
+        ogDescription={`Search your favourite on Muvee Stop by Popular`}
       />
-    </div>
+    );
+  };
+
+  return (
+    <>
+      {generateSeoTags()}
+      <div className="popular mt-4">
+        {wrapPopular()}
+        <Pagination
+          pages={totalPages}
+          currentPage={currentPage}
+          setPage={setCurrentPage}
+        />
+      </div>
+    </>
   );
 }
 
