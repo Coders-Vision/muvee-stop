@@ -9,11 +9,13 @@ function Home() {
   return (
     <>
       <SEO
-        title={"Muvee Stop"}
-        description={"Search all your favourite Movies at Muvee Stop."}
-        keywords={`Muvee Stop, Muvee, movie database, online movie, movie online,movies online,`}
-        ogTitle={"Muvee Stop"}
-        ogDescription={"Search all your favourite Movies at Muvee Stop."}
+        title={"Muvee Stop | Search Movies for Free"}
+        description={`Search online movies for free, search movies free without registration.  Just a better place for searching movies online for free. Muvee Stop, muvee.stop, muvee stop`}
+        keywords={`muvee stop, muvee, search movies, online movie, movie online, search movies online, search movies online free, hd movies, search movies online,`}
+        ogTitle={"Muvee Stop | Search Movies for Free"}
+        ogDescription={
+          "Search online movies for free, search movies free without registration.Just a better place for searching movies online for free. Muvee Stop, muvee.stop, muvee stop."
+        }
       />
       <NowPlaying />
       <TrendingMovies />

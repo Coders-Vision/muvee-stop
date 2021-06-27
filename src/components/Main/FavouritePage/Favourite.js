@@ -1,16 +1,19 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, Image, Toast } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { getMovieById } from "../../../apiService/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimesCircle } from "@fortawesome/free-solid-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
 import SEO from ".././SEOComponent/SEO";
+import LazyImageLoader from "../../Main/LazyImageLoaderComponent/LazyImageLoader";
+
 function Favourite() {
   const [favourite, setFavourite] = useState([]);
   const { removeFavMovie, getFavMoviesId } = useContext(FavouriteMoviesContext);
   const favMoviesId = getFavMoviesId();
+
 
   const poster = "https://image.tmdb.org/t/p/w300/";
   useEffect(() => {
@@ -46,32 +49,19 @@ function Favourite() {
     setFavourite([...remove]);
   };
 
-  const generateSeoTags = () => {
-    return (
-      <SEO
-        title={`Muvee Stop | Favourites`}
-        description={"All browse all your favourites movies"}
-        ogTitle={`Muvee Stop | Favourites`}
-        ogDescription={"All browse all your favourites movies"}
-      />
-    );
-  };
-
   const showFavourite =
     favourite &&
     favourite.map((movie) => {
       return (
         <>
-          {generateSeoTags()}
           <Col className="mb-4" xs="6" md="3" sm="3" key={movie.id}>
             <Card>
               <div className="card-container">
                 <Link to={`/movie/${movie.id}`}>
-                  <Image
-                    className="rounded"
-                    fluid
+                  <LazyImageLoader
                     src={poster + movie.poster}
                     alt={movie.title}
+                    cssClass={"img fluid rounded"}
                   />
                 </Link>
                 <div className="badge-corner badge-corner-base">
@@ -105,8 +95,28 @@ function Favourite() {
     );
   };
 
+  const generateMovieKeywords =
+    favourite &&
+    favourite
+      .slice(0, 16)
+      .map((movie, index) => movie.title)
+      .join(",");
+
+  const generateSeoTags = () => {
+    return (
+      <SEO
+        title={`Muvee Stop | Favourites`}
+        description={"All browse all your favourites movies"}
+        keywords={generateMovieKeywords}
+        ogTitle={`Muvee Stop | Favourites`}
+        ogDescription={"All browse all your favourites movies"}
+      />
+    );
+  };
+
   return (
     <>
+      {generateSeoTags()}
       <div className="favourite mt-4">
         {favourite.length > 0 ? wrapFavourite() : defaultMovie()}
       </div>

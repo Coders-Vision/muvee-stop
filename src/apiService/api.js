@@ -152,7 +152,7 @@ export const getPopularMovies = async (page) => {
         popularity: movie["popularith"],
         title: movie["title"],
         poster: poster + movie["poster_path"],
-        year: movie["release_date"].substr(0, 4),
+        year: movie["release_date"],
         overview: movie["overview"],
         rating: movie["vote_average"],
       }))
@@ -182,7 +182,7 @@ export const getTopRatedMovies = async (page) => {
         popularity: movie["popularith"],
         title: movie["title"],
         poster: poster + movie["poster_path"],
-        year: movie["release_date"].substr(0, 4),
+        year: movie["release_date"],
         overview: movie["overview"],
         rating: movie["vote_average"],
       }))
@@ -261,7 +261,7 @@ export const getGenre = async (genre_id, page) => {
         popularity: movie["popularith"],
         title: movie["title"],
         poster: poster + movie["poster_path"],
-        year: movie["release_date"].substr(0, 4),
+        year: movie["release_date"],
         overview: movie["overview"],
         rating: movie["vote_average"],
       }))

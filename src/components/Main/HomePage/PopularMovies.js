@@ -1,12 +1,15 @@
 import { React, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import { Row, Col, Card, Image } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import { getPopularMovies } from "../../../apiService/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
+import LazyImageLoader from "../../Main/LazyImageLoaderComponent/LazyImageLoader";
+
+
 function PopularMovies() {
   const [popularMovies, setPopularMovies] = useState(null);
   const { checkFavMovie, addFavMovie, removeFavMovie } = useContext(
@@ -77,11 +80,11 @@ function PopularMovies() {
           <Card>
             <div className="card-container">
               <Link to={`/movie/${movie.id}`}>
-                <Image
-                  className="rounded"
-                  fluid
+     
+                <LazyImageLoader
                   src={movie.poster}
                   alt={movie.title}
+                  cssClass={"img fluid rounded"}
                 />
               </Link>
               <div className="badge-corner badge-corner-base">

@@ -14,15 +14,15 @@ const Favourite = React.lazy(() => import("./FavouritePage/Favourite"));
 const NotFoundPage = React.lazy(() => import("./NotFoundPage"));
 
 function Main() {
-
-const Loading=()=>{
-  return(
-    <>
-    <p>Loading</p>
-    </>
-  )
-}
-
+  const Loading = () => {
+    return (
+      <>
+        <div className="ptb-100">
+          <h1>Loading</h1>
+        </div>
+      </>
+    );
+  };
 
   return (
     <div className="main">

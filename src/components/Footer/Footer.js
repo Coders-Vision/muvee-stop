@@ -12,14 +12,14 @@ function Footer() {
         <Row className="text-center mt-3 mb-3">
           <Col xs={6} className="mt-5" style={{ color: "#5a606b" }}>
             <div>
-              <img className="footer-logo" alt={'brand-logo'} src={Logo} />
+              <img className="footer-logo" alt={'Muvee Stop'} src={Logo} />
             </div>
-            <p>© {getYear.getFullYear()} Copyright muvee stop</p>
+            <p>© {getYear.getFullYear()} Copyright Muvee Stop</p>
           </Col>
           <Col xs={6} style={{ color: "#5a606b" }}>
             <div>
               <p>Powered by:</p>
-              <img className="tmdb-logo" alt={'tmdb-logo'}  src={tmdb} />
+              <img className="tmdb-logo" alt={'TMDb'}  src={tmdb} />
             </div>
           </Col>
         </Row>

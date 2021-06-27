@@ -1,17 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, Image } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import GenreList from "./GenreList";
 import { getGenre } from "../../../apiService/api";
 import "../../../styles/Main/Genre.css";
 import Pagination from "../PaginationComponent/Pagination";
-import defaultPoster from "../default-poster.svg";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
 import SEO from ".././SEOComponent/SEO";
+import LazyImageLoader from "../../Main/LazyImageLoaderComponent/LazyImageLoader";
 
 function Genre() {
   const [genreId, setGenreId] = useState(28);
@@ -87,29 +87,38 @@ function Genre() {
 
   const showGenre =
     genre &&
-    genre.slice(0, 16).map((movie, index) => {
+    genre.slice(0, 16).map((movie) => {
       return (
-        <Col xs="6" md="3" sm="3" key={index} className="mb-4">
-          <Card>
-            <div className="card-container">
-              <Link to={`/movie/${movie.id}`}>
-                <Image
-                  className="rounded"
-                  fluid
-                  src={movie.poster}
-                  alt={movie.title}
-                />
-              </Link>
-              <div className="badge-corner badge-corner-base">
-                <span>{showFavIcon(movie.id)}</span>
+        <>
+          <Col xs="6" md="3" sm="3" key={movie.id} className="mb-4">
+            <Card>
+              <div className="card-container">
+                <Link to={`/movie/${movie.id}`}>
+                  {/* <Image
+                    className="rounded"
+                    fluid
+                    src={movie.poster}
+                    alt={movie.title}
+                  
+                  /> */}
+
+                  <LazyImageLoader
+                    src={movie.poster}
+                    alt={movie.title}
+                    cssClass={"img fluid rounded"}
+                  />
+                </Link>
+                <div className="badge-corner badge-corner-base">
+                  <span>{showFavIcon(movie.id)}</span>
+                </div>
               </div>
+            </Card>
+            <div className="mt-3">
+              <div className="text-center">{movie.title}</div>
+              <div className="text-center text-white-50">{movie.year}</div>
             </div>
-          </Card>
-          <div className="mt-3">
-            <div className="text-center">{movie.title}</div>
-            <div className="text-center text-white-50">{movie.year}</div>
-          </div>
-        </Col>
+          </Col>
+        </>
       );
     });
 
@@ -122,18 +131,19 @@ function Genre() {
     );
   };
 
+  const generateMovieKeywords =
+    genre &&
+    genre
+      .slice(0, 16)
+      .map((movie, index) => movie.title)
+      .join(",");
+
   const generateSeoTags = () => {
-    // const movieTitles =
-    //   genre &&
-    //   genre
-    //     .slice(0, 16)
-    //     .map((movie) => movie.title)
-    //     .join(",");
     return (
       <SEO
         title={`Muvee Stop | Genre`}
         description={`Search your favourite on Movie Stop by Genre`}
-        //keywords={movieTitles}
+        keywords={generateMovieKeywords}
         ogTitle={"Muvee Stop | Genre"}
         ogDescription={`Search your favourite on Movie Stop by Genre`}
       />

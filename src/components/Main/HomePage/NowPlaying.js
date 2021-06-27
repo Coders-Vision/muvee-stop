@@ -5,7 +5,6 @@ import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar, faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
-import SEO from ".././SEOComponent/SEO";
 
 function NowPlaying() {
   const [nowPlaying, setNowPlaying] = useState(null);
@@ -24,6 +23,7 @@ function NowPlaying() {
         <Carousel.Item key={index}>
           <Link to={`/movie/${movie.id}`}>
             <div className="hero-poster">
+
               <img
                 className="img-fluid w-100"
                 src={movie.backPoster}

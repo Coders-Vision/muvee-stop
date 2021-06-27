@@ -1,13 +1,13 @@
-import { React, useState, useEffect,useContext } from "react";
+import { React, useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, Image } from "react-bootstrap";
+import { Row, Col, Card} from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
-import defaultPoster from "../default-poster.svg";
 import { getSimilarMovies } from "../../../apiService/api";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
+import LazyImageLoader from "../../Main/LazyImageLoaderComponent/LazyImageLoader";
 
 function SimilarMovies({ id }) {
   const [similarMovies, setSimilarMovies] = useState(null);
@@ -77,11 +77,10 @@ function SimilarMovies({ id }) {
           <Card>
             <div className="card-container">
               <Link to={`/movie/${movie.id}`}>
-                <Image
-                  className="rounded"
-                  fluid
+                <LazyImageLoader
                   src={movie.poster}
                   alt={movie.title}
+                  cssClass={"img fluid rounded"}
                 />
               </Link>
               <div className="badge-corner badge-corner-base">

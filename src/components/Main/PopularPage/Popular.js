@@ -1,15 +1,16 @@
 import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { Row, Col, Card, Image } from "react-bootstrap";
+import { Row, Col, Card } from "react-bootstrap";
 import Skeleton, { SkeletonTheme } from "react-loading-skeleton";
 import { getPopularMovies } from "../../../apiService/api";
-import defaultPoster from "../default-poster.svg";
 import Pagination from "../PaginationComponent/Pagination";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart as faHeartSol } from "@fortawesome/free-solid-svg-icons";
 import { faHeart as faHeartReg } from "@fortawesome/free-regular-svg-icons";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
 import SEO from ".././SEOComponent/SEO";
+import LazyImageLoader from "../../Main/LazyImageLoaderComponent/LazyImageLoader";
+
 function Popular() {
   const [popular, setPopular] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
@@ -89,11 +90,10 @@ function Popular() {
           <Card>
             <div className="card-container">
               <Link to={`/movie/${movie.id}`}>
-                <Image
-                  className="rounded"
-                  fluid
+                <LazyImageLoader
                   src={movie.poster}
                   alt={movie.title}
+                  cssClass={"img fluid rounded"}
                 />
               </Link>
               <div className="badge-corner badge-corner-base">
@@ -118,17 +118,24 @@ function Popular() {
     );
   };
 
+  const generateMovieKeywords =
+    popular &&
+    popular
+      .slice(0, 16)
+      .map((movie, index) => movie.title)
+      .join(",");
+
   const generateSeoTags = () => {
     return (
       <SEO
         title={`Muvee Stop | Popular`}
-        description={`Search your favourite on Muvee Stop by Popular`}
+        description={`Search your favourite on Movie Stop by Popular`}
+        keywords={generateMovieKeywords}
         ogTitle={"Muvee Stop | Popular"}
-        ogDescription={`Search your favourite on Muvee Stop by Popular`}
+        ogDescription={`Search your favourite on Movie Stop by Popular`}
       />
     );
   };
-
   return (
     <>
       {generateSeoTags()}

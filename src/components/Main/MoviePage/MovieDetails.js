@@ -9,7 +9,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faPlayCircle,
-  faHeart as faHeartReg,
   faStar as regularStar,
 } from "@fortawesome/free-regular-svg-icons";
 
@@ -195,11 +194,16 @@ function MovieDetails({ id }) {
   const generateSeoTags = (movieDetail) => {
     return (
       <SEO
-        title={`Muvee Stop | ${movieDetail?.title} (${movieDetails.year.substr(0, 4 )})`}
+        title={`Muvee Stop | ${movieDetail?.title} (${movieDetails.year.substr(
+          0,
+          4
+        )})`}
         description={movieDetail?.overview}
-        ogTitle={movieDetail?.title}
+        ogTitle={`Muvee Stop | ${
+          movieDetail?.title
+        } (${movieDetails.year.substr(0, 4)})`}
         ogDescription={movieDetail?.overview}
-        ogImage={movieDetails?.banner}
+        ogImage={banner + movieDetails?.banner}
       />
     );
   };
