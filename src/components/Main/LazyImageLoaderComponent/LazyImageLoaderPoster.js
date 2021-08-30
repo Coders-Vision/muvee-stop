@@ -1,37 +1,31 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import defaultPoster from "../../Main/default-poster.svg";
+import defaultBanner from "../../Main/default-banner.svg";
 const Image = styled.img`
-display: block;
-height: auto;
-width: 100%;
-background: url(${defaultPoster});
-// Add a smooth animation on loading
-@keyframes loaded {
-  0% {
-    opacity: 0.1;
+  display: block;
+  
+  width: 100%;
+  background: url(${defaultBanner});
+  // Add a smooth animation on loading
+  @keyframes loaded {
+    0% {
+      opacity: 0.1;
+    }
+    100% {
+      opacity: 1;
+    }
   }
-  100% {
-    opacity: 1;
+  &.loaded:not(.has-error) {
+    animation: loaded 300ms ease-in-out;
   }
-}
-// I use utilitary classes instead of props to avoid style regenerating
-&.loaded:not(.has-error) {
-  animation: loaded 300ms ease-in-out;
-}
-&.has-error {
-  // fallback to placeholder image on error
-  content: url(${defaultPoster});
-}
+  &.has-error {
+    // fallback to placeholder image on error
+    content: url(${defaultBanner});
+  }
 `;
 
-
-
-
-function LazyImageLoader({ src, alt, cssClass, failOverImage }) {
-
-
-  const [imageSrc, setImageSrc] = useState(defaultPoster);
+function LazyImageLoaderPoster({ src, alt, cssClass, failOverImage }) {
+  const [imageSrc, setImageSrc] = useState(defaultBanner);
   const [imageRef, setImageRef] = useState();
 
   const onLoad = (event) => {
@@ -91,4 +85,4 @@ function LazyImageLoader({ src, alt, cssClass, failOverImage }) {
   );
 }
 
-export default LazyImageLoader;
+export default LazyImageLoaderPoster;

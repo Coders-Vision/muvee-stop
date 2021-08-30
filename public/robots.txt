@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
+Allow:/
+Allow:/genre
+Allow:/favourites
 Disallow:

@@ -30,9 +30,15 @@
   width: 25px;
   height: 25px;
   margin-top: 10px;
-  margin-right: 10px;;
+  margin-right: 10px;
   float: right;
-  fill: rgb(255, 255, 255);
+  fill: rgba(248, 228, 228, 0.45);
+}
+
+.AutoCompleteText .search-icon:hover {
+  cursor: pointer;
+  transition: fill .4s ease;
+  fill: rgba(248, 228, 228, 1);
 }
 
 .AutoCompleteText ul {
@@ -50,6 +56,19 @@
   scrollbar-width: thin;
   overflow-y: scroll;
   height: 30vh;
+}
+.AutoCompleteText .loading-container {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.AutoCompleteText .loading-container  {
+  font-weight: 300;
+  font-size: 1.25rem;
+  margin: 18%;
 }
 
 .AutoCompleteText ul li {
@@ -99,7 +118,6 @@ li .basic-info .movie-year {
   border-radius: 20px;
   border: 3px solid #3e5169;
 }
-
 
 @media screen and (max-width: 768px) {
   .AutoCompleteText ul {

@@ -1,8 +1,8 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 import "../../styles/Main/Main.css";
-import { Container } from "react-bootstrap";
-
+import { Container, Spinner } from "react-bootstrap";
+import SEO from "./SEOComponent/SEO";
 const Home = React.lazy(() => import("./HomePage/Home"));
 const Genre = React.lazy(() => import("./GenrePage/Genre"));
 const Popular = React.lazy(() => import("./PopularPage/Popular"));
@@ -17,8 +17,8 @@ function Main() {
   const Loading = () => {
     return (
       <>
-        <div className="ptb-100">
-          <h1>Loading</h1>
+        <div className="" style={{padding:"25%"}}>
+          <Spinner animation="border" />
         </div>
       </>
     );
@@ -26,8 +26,17 @@ function Main() {
 
   return (
     <div className="main">
+      <SEO
+        title={"Muvee Stop | Search Movies for Free"}
+        description={`Search online movies for free, search movies free without registration.Just a better place for searching movies online for free.`}
+        keywords={`muvee stop, muvee, search movies, online movie, movie online, search movies online, search movies online free, hd movies, search movies online,`}
+        ogTitle={"Muvee Stop | Search Movies for Free"}
+        ogDescription={
+          "Search online movies for free, search movies free without registration.Just a better place for searching movies online for free. Muvee Stop, muvee.stop, muvee stop."
+        }
+      />
       <Container>
-        <React.Suspense fallback={Loading}>
+        <React.Suspense fallback={Loading()}>
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/genre" component={Genre} />

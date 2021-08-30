@@ -11,7 +11,7 @@ function PaginationComponent({ currentPage, pages, setPage }) {
   const [minPageToShow, setMinPageToShow] = useState(0);
 
   const renderPageNumbers = pageNumbers.map((page) => {
-    if (page < maxPageToShow + 1 && page > minPageToShow) {
+    if (page < maxPageToShow + 1 && page > minPageToShow) 
       return (
         <Pagination.Item
           key={page}
@@ -21,7 +21,7 @@ function PaginationComponent({ currentPage, pages, setPage }) {
           {page}
         </Pagination.Item>
       );
-    }
+    
   });
 
   const handlePrevPage = () => {

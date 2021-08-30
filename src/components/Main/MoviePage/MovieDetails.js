@@ -19,6 +19,7 @@ import defaultPoster from "../default-poster.svg";
 import PlayerModal from "./PlayerModal";
 import { FavouriteMoviesContext } from "../../Context/FavouriteMoviesState";
 import SEO from ".././SEOComponent/SEO";
+import LazyImageLoaderPoster from "../../Main/LazyImageLoaderComponent/LazyImageLoaderPoster";
 
 function MovieDetails({ id }) {
   const banner = "https://image.tmdb.org/t/p/original/";
@@ -60,7 +61,13 @@ function MovieDetails({ id }) {
     return (
       <>
         <div className="moviePoster ">
-          <Image
+        <LazyImageLoaderPoster
+                  src={`${banner}${movieDetails.banner}`}
+                  alt={movieDetails.title}
+                  cssClass={"image-banner img fluid"}
+                />
+          
+          {/* <Image
             fluid
             src={
               movieDetails.banner
@@ -73,7 +80,7 @@ function MovieDetails({ id }) {
               e.target.src = defaultBanner;
             }}
             className="image-banner "
-          />
+          /> */}
           <FontAwesomeIcon
             className="play-icon"
             size="6x"

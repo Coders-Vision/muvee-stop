@@ -12,7 +12,7 @@ const genre = `${URL}/genre/movie/list`;
 const movies = `${URL}/discover/movie`;
 const celebrity = `${URL}/person/`;
 const poster = "https://image.tmdb.org/t/p/w300/";
-const banner = "https://image.tmdb.org/t/p/original/";
+const banner = "https://image.tmdb.org/t/p/w1280/";
 export const getMoviesByQuery = async (queryVal) => {
   try {
     let cancelToken;
